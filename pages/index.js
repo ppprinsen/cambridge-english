@@ -14,10 +14,10 @@ const allQuestions = [
   { question: "They __ to the park last weekend.", answer: "went", type: "fill-in" },
 ];
 
-// 90 extra unieke vragen genereren
+// Extra vragen toevoegen
 for (let i = 10; i < 100; i++) {
   allQuestions.push({
-    question: `Question ${i + 1}: Fill in the blank.`,
+    question: `Question ${i + 1}: What is the correct answer?`,
     answer: `answer${i + 1}`,
     type: i % 2 === 0 ? "fill-in" : "multiple-choice",
     options: i % 2 === 0 ? [] : [`option${i + 1}-1`, `option${i + 1}-2`, `option${i + 1}-3`],
@@ -36,7 +36,7 @@ export default function QuizApp() {
   const [score, setScore] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [showResult, setShowResult] = useState(false);
-  const [mistakes, setMistakes] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Selecteer willekeurig 10 vragen bij het starten
   useEffect(() => {
@@ -46,20 +46,22 @@ export default function QuizApp() {
   const handleAnswer = (option) => {
     if (option === questions[currentQuestion].answer) {
       setScore(score + 1);
+      setErrorMessage("");
+      nextQuestion();
     } else {
-      setMistakes([...mistakes, { question: questions[currentQuestion].question, correct: questions[currentQuestion].answer }]);
+      setErrorMessage("❌ Incorrect! Try again.");
     }
-    nextQuestion();
   };
 
   const handleTextAnswer = () => {
     if (userAnswer.trim().toLowerCase() === questions[currentQuestion].answer.toLowerCase()) {
       setScore(score + 1);
+      setErrorMessage("");
+      setUserAnswer("");
+      nextQuestion();
     } else {
-      setMistakes([...mistakes, { question: questions[currentQuestion].question, correct: questions[currentQuestion].answer }]);
+      setErrorMessage("❌ Incorrect! Try again.");
     }
-    setUserAnswer("");
-    nextQuestion();
   };
 
   const nextQuestion = () => {
@@ -88,6 +90,7 @@ export default function QuizApp() {
                 <button onClick={handleTextAnswer}>Submit</button>
               </div>
             )}
+            {errorMessage && <p style={{ color: "red", fontWeight: "bold" }}>{errorMessage}</p>}
           </div>
         ) : (
           <p>Loading questions...</p>
@@ -96,14 +99,6 @@ export default function QuizApp() {
         <div>
           <h2>Quiz Finished!</h2>
           <p>Your score: {score} / {questions.length}</p>
-          {mistakes.length > 0 && (
-            <div>
-              <h3>Review your mistakes:</h3>
-              {mistakes.map((mistake, index) => (
-                <p key={index}>{mistake.question} <br /> <strong>Correct answer:</strong> {mistake.correct}</p>
-              ))}
-            </div>
-          )}
           <button onClick={() => window.location.reload()}>Restart Quiz</button>
         </div>
       )}
