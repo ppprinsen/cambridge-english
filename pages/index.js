@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const allQuestions = [
-  // Present Simple vs Present Continuous
   {
     question: "She usually __ to school by bus, but today she __.",
     options: ["go / walks", "goes / is walking", "went / walks"],
@@ -12,7 +11,7 @@ const allQuestions = [
     question: "What __ you __ at the moment? You look busy.",
     answer: "are doing",
     type: "fill-in"
-  },
+  }
 ];
 
 export default function QuizApp() {
