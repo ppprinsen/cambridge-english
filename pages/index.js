@@ -29,4 +29,46 @@ export default function QuizApp() {
   };
 
   const handleTextAnswer = () => {
-    if (userAnswer.t
+    if (userAnswer.trim().toLowerCase() === allQuestions[currentQuestion].answer.toLowerCase()) {
+      setScore(score + 1);
+    }
+    setUserAnswer("");
+    nextQuestion();
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestion < allQuestions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      setShowResult(true);
+    }
+  };
+
+  return (
+    <div style={{ textAlign: "center", padding: "50px" }}>
+      {!showResult ? (
+        <div>
+          <h2>{allQuestions[currentQuestion].question}</h2>
+          {allQuestions[currentQuestion].type === "multiple-choice" ? (
+            allQuestions[currentQuestion].options.map((option, index) => (
+              <button key={index} onClick={() => handleAnswer(option)} style={{ margin: "5px", padding: "10px" }}>
+                {option}
+              </button>
+            ))
+          ) : (
+            <div>
+              <input type="text" value={userAnswer} onChange={(e) => setUserAnswer(e.target.value)} />
+              <button onClick={handleTextAnswer}>Submit</button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div>
+          <h2>Quiz Finished!</h2>
+          <p>Your score: {score} / {allQuestions.length}</p>
+          <button onClick={() => window.location.reload()}>Restart Quiz</button>
+        </div>
+      )}
+    </div>
+  );
+}
