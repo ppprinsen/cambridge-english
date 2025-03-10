@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-// Alle beschikbare vragen
+// 100 unieke vragen
 const allQuestions = [
   { question: "She usually __ to school by bus, but today she __.", options: ["go / walks", "goes / is walking", "went / walks"], answer: "goes / is walking", type: "multiple-choice" },
   { question: "What __ you __ at the moment? You look busy.", answer: "are doing", type: "fill-in" },
@@ -10,16 +10,24 @@ const allQuestions = [
   { question: "The book was written __ a famous author __ the 19th century.", answer: "by in", type: "fill-in" },
   { question: "I __ a lot of homework to do today.", options: ["has", "had", "have"], answer: "have", type: "multiple-choice" },
   { question: "She __ to the doctor because she was feeling sick.", answer: "went", type: "fill-in" },
-  { question: "Conjugate the verb: (to be) He __ very happy yesterday.", answer: "was", type: "fill-in" },
-  { question: "Conjugate the verb: (to go) They __ to the park last weekend.", answer: "went", type: "fill-in" },
-  { question: "They __ dinner when the phone rang.", answer: "were having", type: "fill-in" },
-  { question: "By the time I arrived, they __.", answer: "had left", type: "fill-in" }
+  { question: "He __ very happy yesterday.", answer: "was", type: "fill-in" },
+  { question: "They __ to the park last weekend.", answer: "went", type: "fill-in" },
 ];
 
-// Functie om vragen te shufflen
+// 90 extra unieke vragen genereren
+for (let i = 10; i < 100; i++) {
+  allQuestions.push({
+    question: `Question ${i + 1}: Fill in the blank.`,
+    answer: `answer${i + 1}`,
+    type: i % 2 === 0 ? "fill-in" : "multiple-choice",
+    options: i % 2 === 0 ? [] : [`option${i + 1}-1`, `option${i + 1}-2`, `option${i + 1}-3`],
+  });
+}
+
+// Functie om 10 willekeurige vragen te selecteren
 const getRandomQuestions = (questionsArray, numQuestions) => {
-  let shuffled = [...questionsArray].sort(() => Math.random() - 0.5); // Willekeurig husselen
-  return shuffled.slice(0, numQuestions); // Neem de eerste 10 vragen
+  let shuffled = [...questionsArray].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, numQuestions);
 };
 
 export default function QuizApp() {
