@@ -11,8 +11,16 @@ const allQuestions = [
   { question: "I __ a lot of homework to do today.", options: ["has", "had", "have"], answer: "have", type: "multiple-choice" },
   { question: "She __ to the doctor because she was feeling sick.", answer: "went", type: "fill-in" },
   { question: "Conjugate the verb: (to be) He __ very happy yesterday.", answer: "was", type: "fill-in" },
-  { question: "Conjugate the verb: (to go) They __ to the park last weekend.", answer: "went", type: "fill-in" }
+  { question: "Conjugate the verb: (to go) They __ to the park last weekend.", answer: "went", type: "fill-in" },
+  { question: "They __ dinner when the phone rang.", answer: "were having", type: "fill-in" },
+  { question: "By the time I arrived, they __.", answer: "had left", type: "fill-in" }
 ];
+
+// Functie om vragen te shufflen
+const getRandomQuestions = (questionsArray, numQuestions) => {
+  let shuffled = [...questionsArray].sort(() => Math.random() - 0.5); // Willekeurig husselen
+  return shuffled.slice(0, numQuestions); // Neem de eerste 10 vragen
+};
 
 export default function QuizApp() {
   const [questions, setQuestions] = useState([]);
@@ -24,8 +32,7 @@ export default function QuizApp() {
 
   // Selecteer willekeurig 10 vragen bij het starten
   useEffect(() => {
-    const shuffled = allQuestions.sort(() => 0.5 - Math.random()).slice(0, 10);
-    setQuestions(shuffled);
+    setQuestions(getRandomQuestions(allQuestions, 10));
   }, []);
 
   const handleAnswer = (option) => {
@@ -84,4 +91,14 @@ export default function QuizApp() {
           {mistakes.length > 0 && (
             <div>
               <h3>Review your mistakes:</h3>
-              {mi
+              {mistakes.map((mistake, index) => (
+                <p key={index}>{mistake.question} <br /> <strong>Correct answer:</strong> {mistake.correct}</p>
+              ))}
+            </div>
+          )}
+          <button onClick={() => window.location.reload()}>Restart Quiz</button>
+        </div>
+      )}
+    </div>
+  );
+}
