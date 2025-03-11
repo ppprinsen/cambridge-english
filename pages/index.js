@@ -111,29 +111,6 @@ const allQuestions = [
   { question: "The dog __ (bark) loudly all night.", answer: "barked", type: "fill-in" },
   { question: "She __ (sing) beautifully at the competition.", answer: "sang", type: "fill-in" },
   { question: "I __ (paint) a picture for the art contest.", answer: "painted", type: "fill-in" },
-
-  { question: "If it __ (rain), we __ (stay) at home.", answer: "rains / will stay", type: "fill-in" },
-  { question: "If she __ (study), she __ (pass) the test.", answer: "studies / will pass", type: "fill-in" },
-  { question: "If they __ (be) late, they __ (miss) the flight.", answer: "are / will miss", type: "fill-in" },
-  { question: "If I __ (win) the lottery, I __ (buy) a house.", answer: "win / will buy", type: "fill-in" },
-  { question: "If he __ (exercise), he __ (get) stronger.", answer: "exercises / will get", type: "fill-in" },
-
-  { question: "The book is __ the table. (on, in, at)", answer: "on", type: "multiple-choice" },
-  { question: "She was born __ 1999. (on, in, at)", answer: "in", type: "multiple-choice" },
-  { question: "I will meet you __ the airport. (in, on, at)", answer: "at", type: "multiple-choice" },
-  { question: "The shop is located __ the corner. (on, at, in)", answer: "at", type: "multiple-choice" },
-  { question: "He walked __ the street. (through, across, over)", answer: "across", type: "multiple-choice" },
-
-  { question: "I __ (eat) lunch at 2 PM.", answer: "ate", type: "fill-in" },
-  { question: "She __ (drive) to work every day.", answer: "drives", type: "fill-in" },
-  { question: "We __ (swim) in the ocean yesterday.", answer: "swam", type: "fill-in" },
-  { question: "I __ (send) an email to my boss.", answer: "sent", type: "fill-in" },
-  { question: "The cat __ (jump) on the table.", answer: "jumped", type: "fill-in" },
-  { question: "She __ (sing) a song at the concert.", answer: "sang", type: "fill-in" },
-  { question: "They __ (find) a lost wallet.", answer: "found", type: "fill-in" },
-  { question: "He __ (build) a sandcastle on the beach.", answer: "built", type: "fill-in" },
-  { question: "I __ (buy) a new laptop last week.", answer: "bought", type: "fill-in" },
-  { question: "We __ (watch) an interesting documentary.", answer: "watched", type: "fill-in" }
 ];
 
 export default function QuizApp() {
